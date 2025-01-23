@@ -61,20 +61,6 @@ enum category_index
 
 #define tupl tuple<string, string, string, string, string, string, string>
 
-std::vector<std::string> splitString(const std::string &input, char delimiter)
-{
-    std::vector<std::string> result;
-    std::string segment;
-    std::istringstream stream(input);
-
-    while (std::getline(stream, segment, delimiter))
-    {
-        result.push_back(segment);
-    }
-
-    return result;
-}
-
 struct single_question
 {
     u16 user_answer; // 0 - not answered // 1 - correct // 2 - wrong
@@ -152,7 +138,21 @@ class Test
 {
     vector<single_question> all_questions;
 
-    u16 show_question_read_answer(const single_question &q) {}
+    u16 show_question_read_answer(const single_question &q)
+    {
+
+        clear_terminal();
+
+        cout << q.question << endl;
+        cout << "a:" << q.answer_a << endl;
+        cout << "b:" << q.answer_b << endl;
+        cout << "c:" << q.answer_c << endl;
+        cout << "d:" << q.answer_d << endl;
+        cout << endl;
+
+        string user_answer;
+        cin >> user_answer;
+    }
 
     void start() {}
 

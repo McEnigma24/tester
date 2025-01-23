@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-void clearTerminal()
+void clear_terminal()
 {
 #ifdef _WIN32
     std::system("cls"); // Windows
@@ -17,6 +17,37 @@ void clearTerminal()
     std::system("clear"); // Linux / macOS
 #endif
 }
+
+namespace string_utils
+{
+    std::vector<std::string> split_string(const std::string &input,
+                                          char delimiter)
+    {
+        std::vector<std::string> result;
+        std::string segment;
+        std::istringstream stream(input);
+
+        while (std::getline(stream, segment, delimiter))
+        {
+            result.push_back(segment);
+        }
+
+        return result;
+    }
+    std::string to_lower_case(const std::string &input)
+    {
+        std::string result;
+        result.reserve(input.size()); // Rezerwacja miejsca dla wydajności
+
+        for (char c : input)
+        {
+            result +=
+                static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+        }
+
+        return result;
+    }
+} // namespace string_utils
 
 using namespace std;
 

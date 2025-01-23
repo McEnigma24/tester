@@ -81,6 +81,7 @@ install_packages()
 
     echo -ne "\n\n"
     echo "Instalation completed"
+    echo "DONE" > $path_DONE_installed
     echo -ne "\n\n"
 }
 env_prep()

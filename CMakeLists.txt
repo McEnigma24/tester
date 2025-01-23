@@ -13,7 +13,7 @@ aux_source_directory(_src TEST_SOURCES)
 list(FILTER TEST_SOURCES EXCLUDE REGEX ".*main\\.cpp")
 aux_source_directory(_test TEST_SOURCES)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -w")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -march=native")
 
 set(EXE_NAME "out.exe")

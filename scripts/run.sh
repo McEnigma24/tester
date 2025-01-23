@@ -16,8 +16,8 @@ run_and_collect()
     {
         log_name=$(basename $exe); log_name="${log_name%.*}";
         
-        echo -e "\nRUN ($current_file/$total_files) - $exe"; ./$exe > $DIR_LOG/$log_name.log;
-        # echo -e "\nRUN ($current_file/$total_files) - $exe"; ./$exe
+        # echo -e "\nRUN ($current_file/$total_files) - $exe"; ./$exe > $DIR_LOG/$log_name.log;
+        echo -e "\nRUN ($current_file/$total_files) - $exe"; ./$exe
 
         current_file=$((current_file + 1))
     }

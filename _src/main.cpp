@@ -140,7 +140,6 @@ class Test
 
     u16 show_question_read_answer(const single_question &q)
     {
-
         clear_terminal();
 
         cout << q.question << endl;

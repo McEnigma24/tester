@@ -65,70 +65,76 @@ typedef uint64_t u64;
 #define delay_input std::this_thread::sleep_for(std::chrono::milliseconds(50));
 #define Sleep(x) std::this_thread::sleep_for(std::chrono::milliseconds(x));
 
-void clear_terminal()
+struct UTILS
 {
+
+    void clear_terminal()
+    {
 #ifdef _WIN32
-    std::system("cls"); // Windows
+        std::system("cls"); // Windows
 #else
-    std::system("clear"); // Linux / macOS
+        std::system("clear"); // Linux / macOS
 #endif
-}
+    }
 
-namespace string_utils
-{
-    std::vector<std::string> split_string(const std::string &input,
-                                          char delimiter)
+    namespace str
     {
-        std::vector<std::string> result;
-        std::string segment;
-        std::istringstream stream(input);
-
-        while (std::getline(stream, segment, delimiter))
+        std::vector<std::string> split_string(const std::string &input,
+                                              char delimiter)
         {
-            result.push_back(segment);
+            std::vector<std::string> result;
+            std::string segment;
+            std::istringstream stream(input);
+
+            while (std::getline(stream, segment, delimiter))
+            {
+                result.push_back(segment);
+            }
+
+            return result;
+        }
+        // std::string to_lower_case(const std::string &input)
+        // {
+        //     std::string result;
+        //     result.reserve(input.size()); // Rezerwacja miejsca dla
+        //     wydajności
+
+        //     for (char c : input)
+        //     {
+        //         result +=
+        //             static_cast<char>(std::tolower(static_cast<unsigned
+        //             char>(c)));
+        //     }
+
+        //     return result;
+        // }
+    } // namespace str
+
+    namespace vec
+    {
+        template <typename T> void print_on_by_one(const std::vector<T> &vec)
+        {
+            for (auto &v : vec)
+            {
+                cout << v << "\n";
+            }
         }
 
-        return result;
-    }
-    std::string to_lower_case(const std::string &input)
-    {
-        std::string result;
-        result.reserve(input.size()); // Rezerwacja miejsca dla wydajności
-
-        for (char c : input)
+        template <typename T>
+        bool contains(const T &value, const std::vector<T> &vec)
         {
-            result +=
-                static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+            return std::find(vec.begin(), vec.end(), value) != vec.end();
         }
 
-        return result;
-    }
-} // namespace string_utils
-
-namespace vec_utils
-{
-    template <typename T> void print_on_by_one(const std::vector<T> &vec)
-    {
-        for (auto &v : vec)
+        template <typename T>
+        void remove_by_value(const T &value, std::vector<T> &vec)
         {
-            cout << v << "\n";
+            auto it = std::find(vec.begin(), vec.end(), value);
+
+            if (it != vec.end())
+            {
+                vec.erase(it);
+            }
         }
-    }
-
-    template <typename T>
-    bool contains(const T &value, const std::vector<T> &vec)
-    {
-        return std::find(vec.begin(), vec.end(), value) != vec.end();
-    }
-
-    template <typename T>
-    void remove_by_value(const T &value, std::vector<T> &vec)
-    {
-        auto it = std::find(vec.begin(), vec.end(), value);
-
-        if (it != vec.end())
-        {
-            vec.erase(it);
-        }
-    }
-} // namespace vec_utils
+    } // namespace vec
+};

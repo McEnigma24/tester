@@ -77,6 +77,8 @@ std::vector<std::string> splitString(const std::string &input, char delimiter)
 
 struct single_question
 {
+    u16 user_answer; // 0 - not answered // 1 - correct // 2 - wrong
+
     string question;
     string answer_a;
     string answer_b;
@@ -88,8 +90,8 @@ struct single_question
     single_question(string _question, string _answer_a, string _answer_b,
                     string _answer_c, string _answer_d, string _answer_correct,
                     string _explanation)
-        : question(_question), answer_a(_answer_a), answer_b(_answer_b),
-          answer_c(_answer_c), answer_d(_answer_d),
+        : user_answer(0), question(_question), answer_a(_answer_a),
+          answer_b(_answer_b), answer_c(_answer_c), answer_d(_answer_d),
           answer_correct(_answer_correct), explanation(_explanation)
     {
     }
@@ -150,6 +152,12 @@ class Test
 {
     vector<single_question> all_questions;
 
+    u16 show_question_read_answer(const single_question &q) {}
+
+    void start() {}
+
+    void show_score_generate_and_correct_once() {}
+
   public:
     Test(const string &input_file)
     {
@@ -161,33 +169,21 @@ class Test
             {
                 auto question = Format_Buffer::input_log_line_output_obj(line);
 
-                cout << question.question << endl;
-                cout << question.answer_a << endl;
-                cout << question.answer_b << endl;
-                cout << question.answer_c << endl;
-                cout << question.answer_d << endl;
-                cout << question.answer_correct << endl;
-                cout << question.explanation << endl;
-                // cin.get();
+                // cout << question.question << endl;
+                // cout << question.answer_a << endl;
+                // cout << question.answer_b << endl;
+                // cout << question.answer_c << endl;
+                // cout << question.answer_d << endl;
+                // cout << question.answer_correct << endl;
+                // cout << question.explanation << endl;
 
                 all_questions.push_back(question);
             }
         }
 
-        cin.get();
+        start();
 
-        for (auto &question : all_questions)
-        {
-            cout << question.question << endl;
-            cout << question.answer_a << endl;
-            cout << question.answer_b << endl;
-            cout << question.answer_c << endl;
-            cout << question.answer_d << endl;
-            cout << question.answer_correct << endl;
-            cout << question.explanation << endl;
-
-            cin.get();
-        }
+        show_score_generate_and_correct_once();
     }
 };
 

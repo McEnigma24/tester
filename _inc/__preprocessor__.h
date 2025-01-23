@@ -9,6 +9,15 @@
 #include <string>
 #include <vector>
 
+void clearTerminal()
+{
+#ifdef _WIN32
+    std::system("cls"); // Windows
+#else
+    std::system("clear"); // Linux / macOS
+#endif
+}
+
 using namespace std;
 
 #define path_run_time_config "../run_time_config"

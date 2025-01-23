@@ -3,7 +3,7 @@
 
 struct File_Utils
 {
-    static vector<string> read(const string &file_path)
+    static vector<string> read_from(const string &file_path)
     {
         vector<string> ret;
 
@@ -24,8 +24,8 @@ struct File_Utils
         return ret;
     }
 
-    static void save(const vector<string> &input, const string &file_path,
-                     bool add_endl = false)
+    static void save_to(const vector<string> &input, const string &file_path,
+                        bool add_endl = false)
     {
         ofstream FILE(file_path);
         if (!FILE.is_open())
@@ -61,117 +61,141 @@ enum category_index
 
 #define tupl tuple<string, string, string, string, string, string, string>
 
+std::vector<std::string> splitString(const std::string &input, char delimiter)
+{
+    std::vector<std::string> result;
+    std::string segment;
+    std::istringstream stream(input);
+
+    while (std::getline(stream, segment, delimiter))
+    {
+        result.push_back(segment);
+    }
+
+    return result;
+}
+
+struct single_question
+{
+    string question;
+    string answer_a;
+    string answer_b;
+    string answer_c;
+    string answer_d;
+    string answer_correct;
+    string explanation;
+
+    single_question(string _question, string _answer_a, string _answer_b,
+                    string _answer_c, string _answer_d, string _answer_correct,
+                    string _explanation)
+        : question(_question), answer_a(_answer_a), answer_b(_answer_b),
+          answer_c(_answer_c), answer_d(_answer_d),
+          answer_correct(_answer_correct), explanation(_explanation)
+    {
+    }
+};
+
+// clang-format off
 struct Format_Buffer
 {
-    // clang-format off
     static tupl input_log_line_output_variables(const string &log_line)
     {
-        char question[BUFFER_SIZE];
-        char answer_a[BUFFER_SIZE];
-        char answer_b[BUFFER_SIZE];
-        char answer_c[BUFFER_SIZE];
-        char answer_d[BUFFER_SIZE];
-        char answer_correct[BUFFER_SIZE];
-        char explanation[BUFFER_SIZE];
+        auto result = splitString(log_line, '; ');
 
-        sscanf
-        (
-            log_line.c_str(), LINE_FORMAT
-            &question,
-            &answer_a,
-            &answer_b,
-            &answer_c,
-            &answer_d,
-            &answer_correct,
-            &explanation
-        );
+        cout << endl << endl;
+        for(auto& r : result)
+        {
+            r.pop_back();
+            std::replace(r.begin(), r.end(), '_', ' ');
+        }
 
         return
         {
-            question,
-            answer_a,
-            answer_b,
-            answer_c,
-            answer_d,
-            answer_correct,
-            explanation
+            result[0],
+            result[1],
+            result[2],
+            result[3],
+            result[4],
+            result[5],
+            result[6]
         };
     }
-    // clang-format on
 
-    // static tupl input_log_line_output_variables(const string& log_line)
-    // {
-    //     string question;
-    //     string answer_a;
-    //     string answer_b;
-    //     string answer_c;
-    //     string answer_d;
-    //     string answer_correct;
-    //     string explanation;
+    static single_question input_log_line_output_obj(const string &log_line)
+    {
+        auto result = splitString(log_line, '; ');
 
-    //     sscanf
-    //     (
-    //         log_line.c_str(), LINE_FORMAT
+        cout << endl << endl;
+        for(auto& r : result)
+        {
+            r.pop_back();
+            std::replace(r.begin(), r.end(), '_', ' ');
+        }
 
-    //         &question,
-    //         &answer_a,
-    //         &answer_b,
-    //         &answer_c,
-    //         &answer_d,
-    //         &answer_correct,
-    //         &explanation
-    //     );
+        return
+        {
+            result[0],
+            result[1],
+            result[2],
+            result[3],
+            result[4],
+            result[5],
+            result[6]
+        };
+    }
+};
+// clang-format on
 
-    //     return
-    //     {
-    //         question,
-    //         answer_a,
-    //         answer_b,
-    //         answer_c,
-    //         answer_d,
-    //         answer_correct,
-    //         explanation
-    //     };
-    // }
+class Test
+{
+    vector<single_question> all_questions;
+
+  public:
+    Test(const string &input_file)
+    {
+        auto all_lines = File_Utils::read_from(input_file);
+
+        for (auto &line : all_lines)
+        {
+            if (line != "\n" && line != "")
+            {
+                auto question = Format_Buffer::input_log_line_output_obj(line);
+
+                cout << question.question << endl;
+                cout << question.answer_a << endl;
+                cout << question.answer_b << endl;
+                cout << question.answer_c << endl;
+                cout << question.answer_d << endl;
+                cout << question.answer_correct << endl;
+                cout << question.explanation << endl;
+                // cin.get();
+
+                all_questions.push_back(question);
+            }
+        }
+
+        cin.get();
+
+        for (auto &question : all_questions)
+        {
+            cout << question.question << endl;
+            cout << question.answer_a << endl;
+            cout << question.answer_b << endl;
+            cout << question.answer_c << endl;
+            cout << question.answer_d << endl;
+            cout << question.answer_correct << endl;
+            cout << question.explanation << endl;
+
+            cin.get();
+        }
+    }
 };
 
 int main(int argc, char *argv[])
 {
     time_stamp("It just works");
 
-    // vector<string> tmp;
-
-    // tmp.push_back("test 1");
-    // tmp.push_back("test 2");
-    // tmp.push_back("test 3");
-
-    // File_Utils::save(tmp, "output/test.txt", true);
-
-    // auto reading = File_Utils::read("output/test.txt");
-
-    // for(auto& line : reading)
-    // {
-    //     cout << line << endl;
-    // }
-
-    auto reading = File_Utils::read("input/quiz_1.txt");
-
-    for (auto &line : reading)
-    {
-        cout << line << endl;
-        auto variables = Format_Buffer::input_log_line_output_variables(line);
-
-        cout << endl;
-        cout << GET(variables, 0) << endl;
-        cout << GET(variables, 1) << endl;
-        cout << GET(variables, 2) << endl;
-        cout << GET(variables, 3) << endl;
-        cout << GET(variables, 4) << endl;
-        cout << GET(variables, 5) << endl;
-        cout << GET(variables, 6) << endl;
-
-        cin.get();
-    }
+    Test test("input/quiz_1.txt");
 
     return 0;
 }

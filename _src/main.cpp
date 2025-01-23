@@ -88,7 +88,7 @@ struct Format_Buffer
 {
     static tupl input_log_line_output_variables(const string &log_line)
     {
-        auto result = splitString(log_line, '; ');
+        auto result = string_utils::split_string(log_line, '; ');
 
         cout << endl << endl;
         for(auto& r : result)
@@ -111,7 +111,7 @@ struct Format_Buffer
 
     static single_question input_log_line_output_obj(const string &log_line)
     {
-        auto result = splitString(log_line, '; ');
+        auto result = string_utils::split_string(log_line, '; ');
 
         cout << endl << endl;
         for(auto& r : result)

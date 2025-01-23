@@ -1,5 +1,6 @@
 #include "__preprocessor__.h"
 #include "time_stamp.h"
+#include <fstream>
 
 class File_Utils
 {
@@ -8,46 +9,26 @@ class File_Utils
         vector<string> ret;
 
         std::ifstream FILE(file_path);
-
-        if (!plik.is_open())
+        if (!FILE.is_open())
         {
-            std::cerr << "Nie można otworzyć pliku!" << std::endl;
-            return 1;
+            FATAL_ERROR("unable to read file " + file_path);
         }
 
-        std::string linia;
-        while (std::getline(plik, linia))
-        {                                    // Czyta linijka po linijce
-            std::cout << linia << std::endl; // Wypisuje linijkę na konsolę
+        string tmp_line;
+        while (std::getline(FILE, tmp_line))
+        {
+            ret.push_back(tmp_line);
         }
 
-        plik.close(); // Zamknięcie pliku
+        FILE.close();
 
         return ret;
     }
-}
+};
 
 int main(int argc, char *argv[])
 {
     time_stamp("It just works");
-
-    ifstream FILE_input();
-
-    if (!plik.is_open())
-    { // Sprawdza, czy plik został poprawnie otwarty
-        std::cerr << "Nie można otworzyć pliku!" << std::endl;
-        return 1;
-    }
-
-    std::string linia;
-    while (std::getline(plik, linia))
-    {                                    // Czyta linijka po linijce
-        std::cout << linia << std::endl; // Wypisuje linijkę na konsolę
-    }
-
-    plik.close(); // Zamknięcie pliku
-
-    file.close();
 
     return 0;
 }

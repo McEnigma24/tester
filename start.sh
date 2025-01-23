@@ -6,9 +6,12 @@ dir_input="input"
 dir_build="build"
 dir_exe="exe"
 dir_log="log"
-dir_run_time_config="run_time_config"
+
 SCRIPT="./run.sh"
 LOG="../output/start.log"
+
+dir_run_time_config="run_time_config"
+path_DONE_installed="${dir_run_time_config}/DONE_installed.txt"
 
 silent_come_back() { cd - > /dev/null; }
 
@@ -34,6 +37,8 @@ timer_print()
 }
 install_packages()
 {
+    if [ -f $path_DONE_installed ]; then return; fi
+
     # Funkcja sprawdzająca czy pakiet jest zainstalowany
     check_and_install()
     {

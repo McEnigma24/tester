@@ -63,6 +63,7 @@ enum category_index
 
 struct Format_Buffer
 {
+    // clang-format off
     static tupl input_log_line_output_variables(const string &log_line)
     {
         char question[BUFFER_SIZE];
@@ -73,16 +74,30 @@ struct Format_Buffer
         char answer_correct[BUFFER_SIZE];
         char explanation[BUFFER_SIZE];
 
-        sscanf(log_line.c_str(),
-               LINE_FORMAT
+        sscanf
+        (
+            log_line.c_str(), LINE_FORMAT
+            &question,
+            &answer_a,
+            &answer_b,
+            &answer_c,
+            &answer_d,
+            &answer_correct,
+            &explanation
+        );
 
-                   & question,
-               &answer_a, &answer_b, &answer_c, &answer_d, &answer_correct,
-               &explanation);
-
-        return {question, answer_a,       answer_b,   answer_c,
-                answer_d, answer_correct, explanation};
+        return
+        {
+            question,
+            answer_a,
+            answer_b,
+            answer_c,
+            answer_d,
+            answer_correct,
+            explanation
+        };
     }
+    // clang-format on
 
     // static tupl input_log_line_output_variables(const string& log_line)
     // {

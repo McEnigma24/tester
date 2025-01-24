@@ -145,6 +145,9 @@ class Test
         UTILS::clear_terminal();
 
         cout << q.question << endl << endl;
+        // pozamieniać miejscami kilkanaście razy losowe indexy, ta tablica i
+        // tablica z zapisanym poprawnym wynikiem, te same zmiany na jednej i na
+        // drugiej -> nie gubimy poprawnej odpowiedzi
         cout << "a: " << q.answer_a << endl;
         cout << "b: " << q.answer_b << endl;
         cout << "c: " << q.answer_c << endl;
@@ -157,20 +160,21 @@ class Test
         if (UTILS::str::to_lower_case(user_answer) ==
             UTILS::str::to_lower_case(q.answer_correct))
         {
-            cout << "GOOD - Gread job" << endl;
+            cout << "                                                GOOD - "
+                    "Gread job\n\n";
             good++;
-
-            sleep(3000);
         }
         else
         {
-            cout << "WRONG - answer is " << q.answer_correct << endl;
-            cout << q.explanation << endl;
+            cout << "                                                WRONG - "
+                    "answer is "
+                 << q.answer_correct << "\n\n";
             bad++;
-
-            cin.get();
-            cin.get();
         }
+
+        cout << q.explanation << endl;
+        cin.get();
+        cin.get();
 
         q.status = 1;
     }

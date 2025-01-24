@@ -63,7 +63,7 @@ enum category_index
 
 struct single_question
 {
-    u16 user_answer; // 0 - not answered // 1 - correct // 2 - wrong
+    u16 status; // 0 - not answered // 1 - answered
 
     string question;
     string answer_a;
@@ -76,7 +76,7 @@ struct single_question
     single_question(string _question, string _answer_a, string _answer_b,
                     string _answer_c, string _answer_d, string _answer_correct,
                     string _explanation)
-        : user_answer(0), question(_question), answer_a(_answer_a),
+        : status(0), question(_question), answer_a(_answer_a),
           answer_b(_answer_b), answer_c(_answer_c), answer_d(_answer_d),
           answer_correct(_answer_correct), explanation(_explanation)
     {
@@ -88,7 +88,7 @@ struct Format_Buffer
 {
     static tupl input_log_line_output_variables(const string &log_line)
     {
-        auto result = string_utils::split_string(log_line, '; ');
+        auto result = UTILS::str::split_string(log_line, '; ');
 
         cout << endl << endl;
         for(auto& r : result)
@@ -111,7 +111,7 @@ struct Format_Buffer
 
     static single_question input_log_line_output_obj(const string &log_line)
     {
-        auto result = string_utils::split_string(log_line, '; ');
+        auto result = UTILS::str::split_string(log_line, '; ');
 
         cout << endl << endl;
         for(auto& r : result)
@@ -137,28 +137,79 @@ struct Format_Buffer
 class Test
 {
     vector<single_question> all_questions;
+    float good;
+    float bad;
 
-    u16 show_question_read_answer(const single_question &q)
+    void show_question_evaluate_answer(single_question &q)
     {
-        clear_terminal();
+        UTILS::clear_terminal();
 
-        cout << q.question << endl;
-        cout << "a:" << q.answer_a << endl;
-        cout << "b:" << q.answer_b << endl;
-        cout << "c:" << q.answer_c << endl;
-        cout << "d:" << q.answer_d << endl;
+        cout << q.question << endl << endl;
+        cout << "a: " << q.answer_a << endl;
+        cout << "b: " << q.answer_b << endl;
+        cout << "c: " << q.answer_c << endl;
+        cout << "d: " << q.answer_d << endl;
         cout << endl;
 
         string user_answer;
         cin >> user_answer;
+
+        if (UTILS::str::to_lower_case(user_answer) ==
+            UTILS::str::to_lower_case(q.answer_correct))
+        {
+            cout << "GOOD - Gread job" << endl;
+            good++;
+
+            sleep(3000);
+        }
+        else
+        {
+            cout << "WRONG - answer is " << q.answer_correct << endl;
+            cout << q.explanation << endl;
+            bad++;
+
+            cin.get();
+            cin.get();
+        }
+
+        q.status = 1;
     }
 
-    void start() {}
+    single_question &random_question()
+    {
+        u64 random_index{};
+        do
+        {
+            random_index = rand() % all_questions.size();
+        }
+        while (all_questions[random_index].status != 0);
 
-    void show_score_generate_and_correct_once() {}
+        return all_questions[random_index];
+    }
+
+    void show_score()
+    {
+        UTILS::clear_terminal();
+
+        u64 g = (good / all_questions.size()) * 100;
+        u64 b = (bad / all_questions.size()) * 100;
+
+        cout << "correct: " << g << "%" << endl;
+        cout << "bad:     " << b << "%" << endl;
+    }
+
+    void start()
+    {
+        for (auto &q : all_questions)
+        {
+            show_question_evaluate_answer(random_question());
+        }
+
+        show_score();
+    }
 
   public:
-    Test(const string &input_file)
+    Test(const string &input_file) : good(0), bad(0)
     {
         auto all_lines = File_Utils::read_from(input_file);
 
@@ -181,13 +232,12 @@ class Test
         }
 
         start();
-
-        show_score_generate_and_correct_once();
     }
 };
 
 int main(int argc, char *argv[])
 {
+    srand(time(null));
     time_stamp("It just works");
 
     Test test("input/quiz_1.txt");

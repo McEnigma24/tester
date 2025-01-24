@@ -7,7 +7,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
+#include <thread>
 #include <vector>
+
+// przekopiować całe do _template_
 
 using namespace std;
 
@@ -63,12 +66,12 @@ typedef uint64_t u64;
 #define SAFETY_CHECK(x) x;
 
 #define delay_input std::this_thread::sleep_for(std::chrono::milliseconds(50));
-#define Sleep(x) std::this_thread::sleep_for(std::chrono::milliseconds(x));
+#define sleep(x) std::this_thread::sleep_for(std::chrono::milliseconds(x));
 
 struct UTILS
 {
 
-    void clear_terminal()
+    static void clear_terminal()
     {
 #ifdef _WIN32
         std::system("cls"); // Windows
@@ -77,10 +80,10 @@ struct UTILS
 #endif
     }
 
-    namespace str
+    struct str
     {
-        std::vector<std::string> split_string(const std::string &input,
-                                              char delimiter)
+        static std::vector<std::string> split_string(const std::string &input,
+                                                     char delimiter)
         {
             std::vector<std::string> result;
             std::string segment;
@@ -93,26 +96,24 @@ struct UTILS
 
             return result;
         }
-        // std::string to_lower_case(const std::string &input)
-        // {
-        //     std::string result;
-        //     result.reserve(input.size()); // Rezerwacja miejsca dla
-        //     wydajności
+        static std::string to_lower_case(const std::string &input)
+        {
+            std::string result;
+            result.reserve(input.size());
+            for (char c : input)
+            {
+                result += static_cast<char>(
+                    std::tolower(static_cast<unsigned char>(c)));
+            }
 
-        //     for (char c : input)
-        //     {
-        //         result +=
-        //             static_cast<char>(std::tolower(static_cast<unsigned
-        //             char>(c)));
-        //     }
+            return result;
+        }
+    };
 
-        //     return result;
-        // }
-    } // namespace str
-
-    namespace vec
+    struct vec
     {
-        template <typename T> void print_on_by_one(const std::vector<T> &vec)
+        template <typename T>
+        static void print_on_by_one(const std::vector<T> &vec)
         {
             for (auto &v : vec)
             {
@@ -121,13 +122,13 @@ struct UTILS
         }
 
         template <typename T>
-        bool contains(const T &value, const std::vector<T> &vec)
+        static bool contains(const T &value, const std::vector<T> &vec)
         {
             return std::find(vec.begin(), vec.end(), value) != vec.end();
         }
 
         template <typename T>
-        void remove_by_value(const T &value, std::vector<T> &vec)
+        static void remove_by_value(const T &value, std::vector<T> &vec)
         {
             auto it = std::find(vec.begin(), vec.end(), value);
 
@@ -136,5 +137,5 @@ struct UTILS
                 vec.erase(it);
             }
         }
-    } // namespace vec
+    };
 };

@@ -44,23 +44,6 @@ struct File_Utils
     }
 };
 
-#define BUFFER_SIZE 100000
-
-#define GET(t, index) get<index>(t)
-enum category_index
-{
-    QUESTION,
-    ANSWER_A,
-    ANSWER_B,
-    ANSWER_C,
-    ANSWER_D,
-    ANSWER_CORRECT,
-    EXPLANATION
-};
-#define LINE_FORMAT "%s; %s; %s; %s; %s; %s; %s;",
-
-#define tupl tuple<string, string, string, string, string, string, string>
-
 struct single_question
 {
     u16 status; // 0 - not answered // 1 - answered
@@ -83,56 +66,21 @@ struct single_question
     }
 };
 
-// clang-format off
 struct Format_Buffer
 {
-    static tupl input_log_line_output_variables(const string &log_line)
-    {
-        auto result = UTILS::str::split_string(log_line, '; ');
-
-        cout << endl << endl;
-        for(auto& r : result)
-        {
-            r.pop_back();
-            std::replace(r.begin(), r.end(), '_', ' ');
-        }
-
-        return
-        {
-            result[0],
-            result[1],
-            result[2],
-            result[3],
-            result[4],
-            result[5],
-            result[6]
-        };
-    }
-
     static single_question input_log_line_output_obj(const string &log_line)
     {
         auto result = UTILS::str::split_string(log_line, '; ');
-
         cout << endl << endl;
-        for(auto& r : result)
+        for (auto &r : result)
         {
             r.pop_back();
             std::replace(r.begin(), r.end(), '_', ' ');
         }
-
-        return
-        {
-            result[0],
-            result[1],
-            result[2],
-            result[3],
-            result[4],
-            result[5],
-            result[6]
-        };
+        return {result[0], result[1], result[2], result[3],
+                result[4], result[5], result[6]};
     }
 };
-// clang-format on
 
 class Test
 {

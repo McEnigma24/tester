@@ -77,6 +77,7 @@ struct Format_Buffer
             r.pop_back();
             std::replace(r.begin(), r.end(), '_', ' ');
         }
+
         return {result[0], result[1], result[2], result[3],
                 result[4], result[5], result[6]};
     }

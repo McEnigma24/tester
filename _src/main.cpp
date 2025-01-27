@@ -89,35 +89,77 @@ class Test
     float good;
     float bad;
 
+    int change_letter_to_index(const string &letter)
+    {
+        char l = UTILS::str::to_lower_case(letter)[0];
+        return l - 97;
+    }
+
+    template <typename T> void swap_indexes(T *tab, int idx_1, int idx_2)
+    {
+        T tmp = tab[idx_1];
+
+        tab[idx_1] = tab[idx_2];
+        tab[idx_2] = tmp;
+    }
+
+    template <typename T1, typename T2>
+    void mixing_two_tabs(T1 *tab_1, T2 *tab_2, size_t size)
+    {
+        const int number_of_swaps = 15;
+
+        int r1, r2;
+        for (int i = 0; i < number_of_swaps; i++)
+        {
+            r1 = rand() % size;
+            r2 = rand() % size;
+
+            if (r1 == r2)
+            {
+                i--;
+                continue;
+            }
+
+            swap_indexes(tab_1, r1, r2);
+            swap_indexes(tab_2, r1, r2);
+        }
+    }
+
     void show_question_evaluate_answer(single_question &q)
     {
         UTILS::clear_terminal();
 
         cout << q.question << endl << endl;
-        // pozamieniać miejscami kilkanaście razy losowe indexy, ta tablica i
-        // tablica z zapisanym poprawnym wynikiem, te same zmiany na jednej i na
-        // drugiej -> nie gubimy poprawnej odpowiedzi
-        cout << "a: " << q.answer_a << endl;
-        cout << "b: " << q.answer_b << endl;
-        cout << "c: " << q.answer_c << endl;
-        cout << "d: " << q.answer_d << endl;
+
+        bool correct_answer_is[4];
+        memset(correct_answer_is, 0, 4 * sizeof(bool));
+        correct_answer_is[change_letter_to_index(q.answer_correct)] = 1;
+
+        string answers[4] = {q.answer_a, q.answer_b, q.answer_c, q.answer_d};
+
+        mixing_two_tabs(correct_answer_is, answers, 4);
+
+        cout << "a: " << answers[0] << endl;
+        cout << "b: " << answers[1] << endl;
+        cout << "c: " << answers[2] << endl;
+        cout << "d: " << answers[3] << endl;
         cout << endl;
 
         string user_answer;
         cin >> user_answer;
 
-        if (UTILS::str::to_lower_case(user_answer) ==
-            UTILS::str::to_lower_case(q.answer_correct))
+        if (correct_answer_is[change_letter_to_index(user_answer)])
         {
-            cout << "                                                GOOD - "
-                    "Gread job\n\n";
+            cout << "                                                GOOD"
+                    "\n\n";
             good++;
         }
         else
         {
-            cout << "                                                WRONG - "
-                    "answer is "
-                 << q.answer_correct << "\n\n";
+            cout << "                                                WRONG\n"
+                    "                                                          "
+                    "answer is <"
+                 << q.answer_correct << ">\n\n";
             bad++;
         }
 
@@ -149,10 +191,15 @@ class Test
 
         cout << "correct: " << g << "%" << endl;
         cout << "bad:     " << b << "%" << endl;
+
+        cout << "\n\n\n";
     }
 
     void start()
     {
+        // najpierw mieszamy ich pozycje i potem iterujemy od początku ->
+        // zapisujemy ostatnio wykonany index
+
         for (auto &q : all_questions)
         {
             show_question_evaluate_answer(random_question());
@@ -193,7 +240,9 @@ int main(int argc, char *argv[])
     srand(time(null));
     time_stamp("It just works");
 
-    Test test("input/quiz_1.txt");
+    Test test("input/quiz_2.txt");
+
+    // Test test("input/1.txt");
 
     return 0;
 }

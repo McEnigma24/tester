@@ -144,7 +144,8 @@ class Test
     {
         UTILS::clear_terminal();
 
-        cout << q.question << endl << endl;
+        cout << (good + bad) << " / " << all_questions.size() << "\n\n";
+        cout << q.question << "\n\n";
 
         bool correct_answer_is[4];
         memset(correct_answer_is, 0, 4 * sizeof(bool));
@@ -164,22 +165,28 @@ class Test
         cout << endl;
 
         string user_answer;
-        cin >> user_answer;
 
+        do
+        {
+            cin >> user_answer;
+        }
+        while (!(user_answer == "a" || user_answer == "b" ||
+                 user_answer == "c" || user_answer == "d"));
+
+        cout << "                                                ";
         if (correct_answer_is[change_letter_to_index(user_answer)])
         {
-            cout << "                                                GOOD"
-                    "\n\n";
+            cout << "GOOD\n";
             good++;
         }
         else
         {
-            cout << "                                                WRONG\n"
-                    "                                                          "
-                    "answer is < "
-                 << new_correct_answer << " >\n\n";
+            cout << "WRONG\n";
             bad++;
         }
+        cout << "                                                          "
+                "answer is < "
+             << new_correct_answer << " >\n\n";
 
         cout << q.explanation << endl;
         cin.get();

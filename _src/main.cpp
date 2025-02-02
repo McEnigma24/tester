@@ -126,6 +126,20 @@ class Test
         }
     }
 
+    string get_new_correct_answer(bool correct_answer_is[4])
+    {
+        int i;
+        for (i = 0; i < 4; i++)
+            if (correct_answer_is[i])
+                break;
+
+        char ret = 97 + i;
+        string rett;
+        rett += ret;
+
+        return rett;
+    }
+
     void show_question_evaluate_answer(single_question &q)
     {
         UTILS::clear_terminal();
@@ -139,6 +153,9 @@ class Test
         string answers[4] = {q.answer_a, q.answer_b, q.answer_c, q.answer_d};
 
         mixing_two_tabs(correct_answer_is, answers, 4);
+
+        // correct answer after mixing
+        string new_correct_answer = get_new_correct_answer(correct_answer_is);
 
         cout << "a: " << answers[0] << endl;
         cout << "b: " << answers[1] << endl;
@@ -160,7 +177,7 @@ class Test
             cout << "                                                WRONG\n"
                     "                                                          "
                     "answer is < "
-                 << q.answer_correct << " >\n\n";
+                 << new_correct_answer << " >\n\n";
             bad++;
         }
 

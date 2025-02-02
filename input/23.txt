@@ -1,0 +1,17 @@
+[#211] Syntaktyka języka programowania opisuje:
+a)znaczenie instrukcji w języku
+b)formalnie poprawne programy
+>>c)budowę instrukcji w języku
+d)działanie poprawnego programu
+
+[#212] Semantyka języka programowania opisuje:
+>>a)znaczenie instrukcji w języku
+b)formalnie poprawne programy
+c)budowę instrukcji w języku
+d)działanie poprawnego programu
+
+[#213] Nawiasy <> w notacji EBNF oznaczają:
+a)opcjonalne wystąpienie elementu
+b)symbol terminalny
+>>c)symbol nieterminalny
+d)wielokrotne występowanie elementu

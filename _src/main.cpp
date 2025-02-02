@@ -70,12 +70,13 @@ struct Format_Buffer
 {
     static single_question input_log_line_output_obj(const string &log_line)
     {
-        auto result = UTILS::str::split_string(log_line, '; ');
+        auto result = UTILS::str::split_string(log_line, ';');
         cout << endl << endl;
+
         for (auto &r : result)
         {
-            r.pop_back();
-            std::replace(r.begin(), r.end(), '_', ' ');
+            if (r[0] == ' ')
+                r.erase(0, 1);
         }
 
         return {result[0], result[1], result[2], result[3],
@@ -158,8 +159,8 @@ class Test
         {
             cout << "                                                WRONG\n"
                     "                                                          "
-                    "answer is <"
-                 << q.answer_correct << ">\n\n";
+                    "answer is < "
+                 << q.answer_correct << " >\n\n";
             bad++;
         }
 
@@ -240,9 +241,11 @@ int main(int argc, char *argv[])
     srand(time(null));
     time_stamp("It just works");
 
-    Test test("input/quiz_2.txt");
-
+    // Test test("input/quiz_2.txt");
     // Test test("input/1.txt");
+    // Test test("input/wiele do jedno.txt");
+
+    Test test("input/sorted_ONE_ANSWER.txt");
 
     return 0;
 }

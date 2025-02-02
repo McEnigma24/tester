@@ -1,29 +1,29 @@
-Gdzie_znajdują_się_pliki_konfiguracyjne_PAM?; /etc/pam.conf; /etc/pam.d/; /usr/lib/pam/; /var/log/pam/; B; W_notatkach_podano,_że_pliki_konfiguracyjne_PAM_znajdują_się_w_/etc/pam.d.
-Która_grupa_zarządzania_w_PAM_odpowiada_za_kontrolę_ważności_konta?; auth; account; session; password; B; Grupa_"account"_w_PAM_odpowiada_za_kontrolę_dostępu,_np._ważność_konta.
-Co_przechowuje_inode?; nazwę_pliku; metadane_pliku; zawartość_pliku; ścieżkę_do_pliku; B; Inode_przechowuje_metadane_(np._rozmiar,_właściciel),_ale_nie_nazwę_pliku,_która_jest_w_katalogu.
-Który_katalog_zawiera_pliki_urządzeń?; /proc; /dev; /var; /tmp; B; Katalog_/dev_zawiera_pliki_reprezentujące_urządzenia.
-Który_typ_ACL_jest_używany_do_filtrowania_ruchu_sieciowego?; DACL; NACL; SACL; RACL; B; NACL_(Network_ACL)_służy_do_filtrowania_ruchu_w_sieci,_np._w_routerach.
-Co_oznacza_przekroczenie_"soft_limit"_w_systemie_kontyngentów?; natychmiastowe_blokowanie_zapisu; ostrzeżenie_i_okres_karencji; usunięcie_danych; brak_konsekwencji; B; Soft_limit_generuje_ostrzeżenie,_a_użytkownik_ma_czas_(grace_periona_zmniejszenie_zużycia.
-Który_element_NIE_jest_częścią_kontekstu_procesu_(PCB)?; PID; otwarte_pliki; zawartość_dysku; rejestry_procesora; C; Zawartość_dysku_nie_jest_częścią_PCB_–_PCB_obejmuje_PID,_rejestry,_otwarte_pliki_itp.
-Jaki_jest_domyślny_priorytet_(wartość_nice)_procesu?; -20; 0; 10; 19; B; Domyślna_wartość_nice_to_0,_a_zakres_to_od_-20_do_19.
-Który_mechanizm_komunikacji_między_procesami_jest_jednokierunkowy_i_tymczasowy?; kolejki_komunikatów; potoki; pamięć_współdzielona; semafory; B; Potoki_są_jednokierunkowe,_tymczasowe_i_używane_między_procesami_spokrewnionymi.
-Co_jest_głównym_zadaniem_Kerberos?; zarządzanie_plikami; uwierzytelnianie_z_użyciem_biletów; monitorowanie_sieci; szyfrowanie_dysków; B; Kerberos_używa_biletów_(np._TGT)_do_bezpiecznego_uwierzytelniania_bez_przesyłania_haseł.
-Która_komenda_zmienia_priorytet_istniejącego_procesu?; nice; renice; chmod; kill; B; Komenda_"renice"_służy_do_zmiany_priorytetu_istniejącego_procesu_(np._renice_-n_5_-p_1234).
-Który_typ_pliku_reprezentuje_komunikację_między_procesami?; symlink; katalog; socket; urządzenie; C; Sockety_i_potoki_(FIFO)_służą_do_komunikacji_między_procesami.
-Co_oznacza_skrót_LDAP?; Local_Data_Access_Protocol; Lightweight_Directory_Access_Protocol; Linux_Disk_Allocation_Protocol; Logical_Device_Administration_Panel; B; LDAP_to_Lightweight_Directory_Access_Protocol,_używany_do_zarządzania_hierarchicznymi_danymi.
-Który_moduł_PAM_przerywa_autentykację_natychmiast_po_błędzie?; required; sufficient; optional; requisite; D; Moduł_"requisite"_natychmiast_przerywa_autentykację_w_przypadku_błędu.
-Jaka_jest_domyślna_reguła_w_ewaluacji_ACL?; zezwól,_jeśli_nie_zabroniono; odmów,_jeśli_nie_zezwolono; zawsze_zezwalaj; zawsze_blokuj; B; Domyślnie_obowiązuje_"implicit_deny"_–_odmowa_dostępu,_jeśli_żadna_reguła_nie_pasuje.
-Który_katalog_zawiera_wirtualny_system_plików_z_informacjami_o_procesach?; /dev; /proc; /tmp; /var; B; W_notatkach_podano,_że_katalog_/proc_to_wirtualny_system_plików_z_informacjami_o_procesach.
-Który_mechanizm_synchronizuje_dostęp_do_zasobów_za_pomocą_liczników?; semafory; potoki; sockety; kolejki_komunikatów; A; Semafor_to_mechanizm_synchronizacji_oparty_na_licznikach_(wymieniony_w_notatkach).
-Co_oznacza_skrót_TGT_w_Kerberos?; Temporary_Group_Ticket; Ticket_Granting_Ticket; Time-Based_Grant_Token; Transport_Guarded_Token; B; TGT_(Ticket_Granting_Ticket)_to_bilet_umożliwiający_uzyskanie_biletów_na_konkretne_usługi.
-Jaka_jest_domyślna_polityka_ewaluacji_reguł_w_ACL?; pierwsza_pasująca_reguła_decyduje; ostatnia_pasująca_reguła_decyduje; wszystkie_reguły_są_sumowane; reguły_są_losowe; A; Notatki_podkreślają,_że_kolejność_reguł_jest_kluczowa_–_pierwsza_pasująca_decyduje.
-Który_element_jest_częścią_inode?; nazwa_pliku; wskaźniki_do_bloków_danych; ścieżka_montowania; rozmiar_katalogu_nadrzędnego; B; Inode_zawiera_wskaźniki_do_bloków_danych,_ale_nie_nazwę_pliku_(ta_jest_w_katalogu).
-Co_dzieje_się_po_przekroczeniu_„hard_limit”_w_systemie_kontyngentów?; generowane_jest_ostrzeżenie; zapis_jest_natychmiast_blokowany; dane_są_usuwane; limit_jest_automatycznie_zwiększany; B; Hard_limit_blokuje_zapis_natychmiast_po_przekroczeniu.
-Który_typ_pliku_reprezentuje_urządzenie_blokowe?; socket; symlink; /dev/sda; /proc/version; C; Pliki_w_/dev_(np._/dev/sdreprezentują_urządzenia,_w_tym_blokowe.
-Które_polecenie_tworzy_kopię_procesu_z_nowym_PID?; exec; fork; kill; nice; B; Funkcja_fork_tworzy_kopię_procesu-rodzica_z_nowym_PID.
-Jaki_zakres_wartości_„nice”_może_ustawić_zwykły_użytkownik?; od_-20_do_19; od_0_do_19; od_1_do_99; tylko_0; B; Zwykli_użytkownicy_mogą_obniżać_priorytet_(zwiększać_wartość_nice_do_19).
-Co_oznacza_skrót_KDC_w_Kerberos?; Key_Data_Center; Kernel_Data_Controller; Key_Distribution_Center; Key_Directory_Cache; C; KDC_(Key_Distribution_Center)_to_centralny_serwer_odpowiedzialny_za_dystrybucję_kluczy_w_Kerberos.
-Który_mechanizm_IPC_wymaga_synchronizacji_przez_muteksy?; pamięć_współdzielona; potoki; sygnały; kolejki_komunikatów; A; Pamięć_współdzielona_wymaga_synchronizacji,_np._przez_muteksy.
-Który_typ_ACL_definiuje_właściciel_zasobu?; NACL; DACL; SACL; RACL; B; DACL_(Dyskretne_ACL)_pozwala_właścicielowi_zasobu_definiować_uprawnienia.
-Co_przechowuje_katalog?; metadane_plików; nazwy_plików_i_numery_inode; bloki_danych; sockety; B; Katalog_to_plik_mapujący_nazwy_na_numery_inode_(zgodnie_z_notatkami).
-Który_sygnał_całkowicie_zatrzymuje_proces?; SIGINT; SIGSTOP; SIGKILL; SIGCONT; C; SIGKILL_natychmiastowo_kończy_proces_(wymieniony_w_sekcji_o_sygnałach).
+Gdzie znajdują się pliki konfiguracyjne PAM?; /etc/pam.conf; /etc/pam.d/; /usr/lib/pam/; /var/log/pam/; B; W notatkach podano, że pliki konfiguracyjne PAM znajdują się w /etc/pam.d.
+Która grupa zarządzania w PAM odpowiada za kontrolę ważności konta?; auth; account; session; password; B; Grupa "account" w PAM odpowiada za kontrolę dostępu, np. ważność konta.
+Co przechowuje inode?; nazwę pliku; metadane pliku; zawartość pliku; ścieżkę do pliku; B; Inode przechowuje metadane (np. rozmiar, właściciel), ale nie nazwę pliku, która jest w katalogu.
+Który katalog zawiera pliki urządzeń?; /proc; /dev; /var; /tmp; B; Katalog /dev zawiera pliki reprezentujące urządzenia.
+Który typ ACL jest używany do filtrowania ruchu sieciowego?; DACL; NACL; SACL; RACL; B; NACL (Network ACL) służy do filtrowania ruchu w sieci, np. w routerach.
+Co oznacza przekroczenie "soft limit" w systemie kontyngentów?; natychmiastowe blokowanie zapisu; ostrzeżenie i okres karencji; usunięcie danych; brak konsekwencji; B; Soft limit generuje ostrzeżenie, a użytkownik ma czas (grace periona zmniejszenie zużycia.
+Który element NIE jest częścią kontekstu procesu (PCB)?; PID; otwarte pliki; zawartość dysku; rejestry procesora; C; Zawartość dysku nie jest częścią PCB – PCB obejmuje PID, rejestry, otwarte pliki itp.
+Jaki jest domyślny priorytet (wartość nice) procesu?; -20; 0; 10; 19; B; Domyślna wartość nice to 0, a zakres to od -20 do 19.
+Który mechanizm komunikacji między procesami jest jednokierunkowy i tymczasowy?; kolejki komunikatów; potoki; pamięć współdzielona; semafory; B; Potoki są jednokierunkowe, tymczasowe i używane między procesami spokrewnionymi.
+Co jest głównym zadaniem Kerberos?; zarządzanie plikami; uwierzytelnianie z użyciem biletów; monitorowanie sieci; szyfrowanie dysków; B; Kerberos używa biletów (np. TGT) do bezpiecznego uwierzytelniania bez przesyłania haseł.
+Która komenda zmienia priorytet istniejącego procesu?; nice; renice; chmod; kill; B; Komenda "renice" służy do zmiany priorytetu istniejącego procesu (np. renice -n 5 -p 1234).
+Który typ pliku reprezentuje komunikację między procesami?; symlink; katalog; socket; urządzenie; C; Sockety i potoki (FIFO) służą do komunikacji między procesami.
+Co oznacza skrót LDAP?; Local Data Access Protocol; Lightweight Directory Access Protocol; Linux Disk Allocation Protocol; Logical Device Administration Panel; B; LDAP to Lightweight Directory Access Protocol, używany do zarządzania hierarchicznymi danymi.
+Który moduł PAM przerywa autentykację natychmiast po błędzie?; required; sufficient; optional; requisite; D; Moduł "requisite" natychmiast przerywa autentykację w przypadku błędu.
+Jaka jest domyślna reguła w ewaluacji ACL?; zezwól, jeśli nie zabroniono; odmów, jeśli nie zezwolono; zawsze zezwalaj; zawsze blokuj; B; Domyślnie obowiązuje "implicit deny" – odmowa dostępu, jeśli żadna reguła nie pasuje.
+Który katalog zawiera wirtualny system plików z informacjami o procesach?; /dev; /proc; /tmp; /var; B; W notatkach podano, że katalog /proc to wirtualny system plików z informacjami o procesach.
+Który mechanizm synchronizuje dostęp do zasobów za pomocą liczników?; semafory; potoki; sockety; kolejki komunikatów; A; Semafor to mechanizm synchronizacji oparty na licznikach (wymieniony w notatkach).
+Co oznacza skrót TGT w Kerberos?; Temporary Group Ticket; Ticket Granting Ticket; Time-Based Grant Token; Transport Guarded Token; B; TGT (Ticket Granting Ticket) to bilet umożliwiający uzyskanie biletów na konkretne usługi.
+Jaka jest domyślna polityka ewaluacji reguł w ACL?; pierwsza pasująca reguła decyduje; ostatnia pasująca reguła decyduje; wszystkie reguły są sumowane; reguły są losowe; A; Notatki podkreślają, że kolejność reguł jest kluczowa – pierwsza pasująca decyduje.
+Który element jest częścią inode?; nazwa pliku; wskaźniki do bloków danych; ścieżka montowania; rozmiar katalogu nadrzędnego; B; Inode zawiera wskaźniki do bloków danych, ale nie nazwę pliku (ta jest w katalogu).
+Co dzieje się po przekroczeniu „hard limit” w systemie kontyngentów?; generowane jest ostrzeżenie; zapis jest natychmiast blokowany; dane są usuwane; limit jest automatycznie zwiększany; B; Hard limit blokuje zapis natychmiast po przekroczeniu.
+Który typ pliku reprezentuje urządzenie blokowe?; socket; symlink; /dev/sda; /proc/version; C; Pliki w /dev (np. /dev/sdreprezentują urządzenia, w tym blokowe.
+Które polecenie tworzy kopię procesu z nowym PID?; exec; fork; kill; nice; B; Funkcja fork tworzy kopię procesu-rodzica z nowym PID.
+Jaki zakres wartości „nice” może ustawić zwykły użytkownik?; od -20 do 19; od 0 do 19; od 1 do 99; tylko 0; B; Zwykli użytkownicy mogą obniżać priorytet (zwiększać wartość nice do 19).
+Co oznacza skrót KDC w Kerberos?; Key Data Center; Kernel Data Controller; Key Distribution Center; Key Directory Cache; C; KDC (Key Distribution Center) to centralny serwer odpowiedzialny za dystrybucję kluczy w Kerberos.
+Który mechanizm IPC wymaga synchronizacji przez muteksy?; pamięć współdzielona; potoki; sygnały; kolejki komunikatów; A; Pamięć współdzielona wymaga synchronizacji, np. przez muteksy.
+Który typ ACL definiuje właściciel zasobu?; NACL; DACL; SACL; RACL; B; DACL (Dyskretne ACL) pozwala właścicielowi zasobu definiować uprawnienia.
+Co przechowuje katalog?; metadane plików; nazwy plików i numery inode; bloki danych; sockety; B; Katalog to plik mapujący nazwy na numery inode (zgodnie z notatkami).
+Który sygnał całkowicie zatrzymuje proces?; SIGINT; SIGSTOP; SIGKILL; SIGCONT; C; SIGKILL natychmiastowo kończy proces (wymieniony w sekcji o sygnałach).

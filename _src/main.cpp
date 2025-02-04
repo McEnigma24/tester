@@ -147,6 +147,8 @@ class Test
     {
         UTILS::clear_terminal();
 
+        cout << "< " << q.group_name << " >   -   ";
+
         cout << (good + bad) << " / " << all_questions.size() << "\n\n";
         cout << q.question << "\n\n";
 

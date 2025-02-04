@@ -202,7 +202,9 @@ class Test
 
     single_question &random_question()
     {
-        static string previous_group = "";
+        static string previous_group =
+            ""; // DOPISAĆ ŻEBY DO KOŃCA LOSOWAŁO Z DANEJ GRUPY (wszystko czego
+                // jeszcze nie, aż tak dobrze znam -> notatka)
 
         u64 random_index{};
         do

@@ -275,7 +275,7 @@ class Test
         //     cout << question.explanation << endl;
         // }
 
-        // start();
+        start();
     }
 };
 

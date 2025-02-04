@@ -240,9 +240,24 @@ class Test
 
         for (auto &line : all_lines)
         {
-            if (line != "\n" && line != "")
+            if (line != "\n" && line != "\r\n" && line != "")
             {
-                auto question = Format_Buffer::input_log_line_output_obj(line);
+                if (line)
+
+                    if (str.find(substring) == std::string::npos)
+                    {
+                        std::cout
+                            << "The string does NOT contain the substring."
+                            << std::endl;
+                    }
+                    else
+                    {
+                        std::cout << "The string contains the substring."
+                                  << std::endl;
+                    }
+
+                // auto question =
+                // Format_Buffer::input_log_line_output_obj(line);
 
                 // cout << question.question << endl;
                 // cout << question.answer_a << endl;
@@ -252,9 +267,11 @@ class Test
                 // cout << question.answer_correct << endl;
                 // cout << question.explanation << endl;
 
-                all_questions.push_back(question);
+                // all_questions.push_back(question);
             }
         }
+
+        return;
 
         start();
     }
@@ -273,3 +290,9 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+
+// Sprawdź poprawność odpowiedzi na pytanie oraz napisz wytłumaczenie dlaczego
+// jest to poprawna odpowiedź, wytłumacz czemu inne są błędne. Pytanie ma
+// format: "Treść pytania"; "Treść odp. A"; "Treść odp. B"; "Treść odp. C";
+// "Treść odp. D"; "Literka poprawnej odpowiedzi"; "wytłumaczenie,
+// argumentacja". Pytanie:
